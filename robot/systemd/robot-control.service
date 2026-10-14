@@ -1,0 +1,22 @@
+[Unit]
+Description=Robot UDP joystick command receiver
+Wants=robot-5g.service robot-base.service
+After=robot-5g.service robot-base.service
+PartOf=robot-demo.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Environment=HOME=/root
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/home/wheeltec/Projects/OranDemos/Demo1
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/local/sbin/robot_control.sh
+ExecStop=/usr/bin/python3 /usr/local/sbin/robot_stop.py
+Restart=always
+RestartSec=3
+KillSignal=SIGINT
+TimeoutStopSec=15
+
+[Install]
+WantedBy=robot-demo.target

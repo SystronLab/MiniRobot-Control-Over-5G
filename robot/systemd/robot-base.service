@@ -1,0 +1,19 @@
+[Unit]
+Description=Wheeltec ROS robot base
+Wants=robot-5g.service
+After=robot-5g.service
+PartOf=robot-demo.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Environment=HOME=/root
+WorkingDirectory=/home/wheeltec/Projects/OranDemos/Demo1
+ExecStart=/usr/local/sbin/robot_base.sh
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=15
+
+[Install]
+WantedBy=robot-demo.target

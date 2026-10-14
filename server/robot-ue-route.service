@@ -1,0 +1,16 @@
+[Unit]
+Description=Route the robot UE subnet through the Open5GS container
+Wants=docker.service
+After=docker.service
+PartOf=docker.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ip route replace 10.45.0.0/24 via 10.53.1.2 src 10.53.1.1
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

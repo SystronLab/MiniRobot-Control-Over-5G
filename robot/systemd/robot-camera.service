@@ -1,0 +1,20 @@
+[Unit]
+Description=Robot 1080p camera stream over 5G
+Wants=robot-5g.service
+After=robot-5g.service
+PartOf=robot-demo.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=wheeltec
+SupplementaryGroups=video
+WorkingDirectory=/home/wheeltec/Projects/OranDemos/Demo1
+ExecStart=/bin/bash /home/wheeltec/Projects/OranDemos/Demo1/oran_demo1_camera_startup.sh
+Restart=always
+RestartSec=3
+KillSignal=SIGINT
+TimeoutStopSec=10
+
+[Install]
+WantedBy=robot-demo.target

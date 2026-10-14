@@ -1,0 +1,6 @@
+[Unit]
+Description=Robot 5G connection, motion controller and HD camera
+Wants=robot-5g.service robot-base.service robot-control.service robot-camera.service
+
+[Install]
+WantedBy=multi-user.target

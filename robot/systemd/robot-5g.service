@@ -1,0 +1,17 @@
+[Unit]
+Description=Maintain the robot 5G modem, internet route and DNS
+Wants=ModemManager.service systemd-resolved.service systemd-timesyncd.service
+After=ModemManager.service systemd-resolved.service
+PartOf=robot-demo.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=notify
+NotifyAccess=main
+TimeoutStartSec=0
+ExecStart=/usr/bin/python3 -u /usr/local/sbin/robot_5g.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=robot-demo.target

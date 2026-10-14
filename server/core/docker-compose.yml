@@ -1,0 +1,37 @@
+# Core service from the working OCUDU Compose file. gNB runs on the host.
+name: docker
+services:
+  5gc:
+    container_name: open5gs_5gc
+    build:
+      context: open5gs
+      target: open5gs
+      args:
+        OS_VERSION: '22.04'
+        OPEN5GS_VERSION: v2.7.6
+    env_file:
+    - ${OPEN_5GS_ENV_FILE:-open5gs/open5gs.env}
+    privileged: true
+    ports:
+    - 9999:9999/tcp
+    command: 5gc -c open5gs-5gc.yml
+    volumes:
+    - ./open5gs/add_users.py:/open5gs/add_users.py:ro
+    - ./open5gs/open5gs_entrypoint.sh:/open5gs/open5gs_entrypoint.sh:ro
+    - ./open5gs/setup_tun.py:/open5gs/setup_tun.py:ro
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - nc -z 127.0.0.20 7777
+      interval: 3s
+      timeout: 1s
+      retries: 60
+    networks:
+      ran:
+        ipv4_address: ${OPEN5GS_IP:-10.53.1.2}
+networks:
+  ran:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.53.1.0/24
