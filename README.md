@@ -55,12 +55,10 @@ Keep these three terminals open. Releasing the D-pad returns to the left stick, 
 | `robot/boot/`, `robot/systemd/` | Automatic 5G, base, controller, and camera startup |
 | `robot/scripts/` | Camera pipeline and startup wrappers |
 | `robot/ros2/` | Working UDP-to-ROS controller, including its stop timeout |
-| `robot/vendor-src/`, `robot/udev/` | Base driver, dependencies, launch settings, device rules |
+| `robot/vendor-src/`, `robot/udev/` | Base driver, dependencies, active Mini Mec model, launch settings, device rules |
 
 [Restore/build instructions](docs/restore.md) · [Network and troubleshooting](docs/network.md) · [Versions and file origins](docs/provenance.md)
 
 SIM credentials and SSH passwords are excluded. Fill in `server/core/open5gs/open5gs.env.example` locally when restoring. The existing machines already have their settings.
 
-The live services and video were checked on 14 October 2026. A full cold-boot test and a clean-machine rebuild have not been performed.
-
-The Mini Mec URDF/mesh backup is pending: the robot lost connectivity during export. Keep the existing `wheeltec_robot_urdf` package on the robot.
+The robot startup services and 5G internet were verified after a power cycle on 14 October 2026. The connection later dropped and recovered, with RF underflows reported by the gNB. A full server cold-boot test and a clean-machine rebuild have not been performed.

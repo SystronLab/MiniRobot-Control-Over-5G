@@ -30,7 +30,7 @@ The environment file is a template with SIM identity, key, OPc/OP, and AMF repla
 - Controller package: `.../Demo1/ROS/src/demo1_5g_robot_controller/`.
 - **Controller implementation:** copied from the installed package under `.../Demo1/ROS/src/install/demo1_5g_robot_controller/lib/python3.10/site-packages/`. This is the running implementation with the five-second timeout; the old source copy lacked it.
 - Base source: `/home/wheeltec/wheeltec_ros2/src/`. Launch and configuration files were overlaid from the installed package to match runtime settings.
-- Mini Mec URDF and its referenced meshes: export was prepared on the robot, but the connection dropped before download. These files are not included yet; retain the installed `wheeltec_robot_urdf` package.
+- Mini Mec URDF and all its referenced meshes: copied from the installed `wheeltec_robot_urdf` package. Package/build metadata and RViz files come from its source package. Other vehicle models are omitted.
 - Device rules: `/etc/udev/rules.d/`.
 
 The wrapper scripts retain the existing `/home/wheeltec` workspace paths and source `yolo_ws` and `wheeltec_ros2`, as on the robot. The old root cron entry has already been removed on the live robot.

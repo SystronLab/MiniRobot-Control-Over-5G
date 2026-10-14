@@ -128,9 +128,9 @@ If restoring an older robot setup, remove only this obsolete line with `sudo cro
 @reboot /home/wheeltec/Projects/OranDemos/Demo1/oran_demo1_startup.sh
 ```
 
-The existing robot already has the base driver and rules installed. If those need restoring, copy the saved `robot/vendor-src/` packages into the corresponding locations in `~/wheeltec_ros2/src/`, retaining only one copy of each ROS package. `serial_ros2` and `ackermann_msgs-ros2` originally live under `src/depend/`. Keep the existing `wheeltec_robot_urdf` package and its Mini Mec model; that backup is still pending.
+The existing robot already has the base driver and rules installed. If those need restoring, copy the saved `robot/vendor-src/` packages into the corresponding locations in `~/wheeltec_ros2/src/`, retaining only one copy of each ROS package. `serial_ros2` and `ackermann_msgs-ros2` originally live under `src/depend/`; `wheeltec_robot_urdf` originally lives under `src/wheeltec_robot_urdf/wheeltec_robot_urdf/`.
 
-Then use the vendor workspace dependencies (including ROS robot localization, Madgwick IMU filter, navigation messages/common, and state publishers), rebuild with `colcon build --packages-up-to turn_on_wheeltec_robot`, and source its `install/setup.bash`. The existing model package provides the active Mini Mec configuration. Install the controller udev rules if missing:
+Then use the vendor workspace dependencies (including ROS robot localization, Madgwick IMU filter, navigation messages/common, and state publishers), rebuild with `colcon build --packages-up-to turn_on_wheeltec_robot wheeltec_robot_urdf`, and source its `install/setup.bash`. The saved model supports the active Mini Mec configuration. Install the controller udev rules if missing:
 
 ```bash
 sudo install -m 644 robot/udev/wheeltec_controller*.rules /etc/udev/rules.d/
